@@ -17,7 +17,7 @@ import com.buzzlogix.http.response.HttpStringResponse;
 import com.buzzlogix.http.client.APICallBack;
 import com.buzzlogix.*;
 
-public class ObjectivityController extends BaseController {
+public class KeywordsController extends BaseController {
 
     //private fields for configuration
 
@@ -26,13 +26,13 @@ public class ObjectivityController extends BaseController {
 
    /**
     * Constructor with authentication and configuration parameters */
-    public ObjectivityController (String apikey) {
+    public KeywordsController (String apikey) {
         this.apikey = apikey;
     }
 
    /**
     * Constructor with authentication and configuration parameters */
-    public ObjectivityController (HttpClient _client, String apikey) {
+    public KeywordsController (HttpClient _client, String apikey) {
         super(_client);
         this.apikey = apikey;
     }
@@ -41,7 +41,7 @@ public class ObjectivityController extends BaseController {
      * The text should be provided as text/plain in the body
      * @param    body    Required parameter: Supply text to be classified.
 	 * @return	Returns the LinkedHashMap<String, Object> response from the API call*/
-    public void createReturnEnglishObjectivityAsync(
+    public void createReturnEnglishKeywordsAsync(
             final String body,
             final APICallBack<LinkedHashMap<String, Object>> callBack
     ) {
@@ -50,13 +50,13 @@ public class ObjectivityController extends BaseController {
 
         //prepare query string for API call
         StringBuilder queryBuilder = new StringBuilder(baseUri);
-        queryBuilder.append("/objectivity");
+        queryBuilder.append("/keywords");
         //validate and preprocess url
         String queryUrl = APIHelper.cleanUrl(queryBuilder);
 
         //load all headers for the outgoing API request
         Map<String, String> headers = new HashMap<String, String>() {
-            private static final long serialVersionUID = 5700714153347667583L;
+            private static final long serialVersionUID = 5708636933201393994L;
             {
                     put( "user-agent", "APIMATIC 2.0" );
                     put( "accept", "application/json" );
@@ -115,9 +115,11 @@ public class ObjectivityController extends BaseController {
         
     /**
      * The text should be provided as multipart/form-data with the key 'text'. Files can be uploaded.
+     * @param    apikey    Required parameter: Supply your API key.
      * @param    body    Required parameter: Supply text to be classified.
 	 * @return	Returns the LinkedHashMap<String, Object> response from the API call*/
-    public void createReturnEnglishObjectivityFormAsync(
+    public void createReturnEnglishKeywordsFormAsync(
+            final String apikey,
             final String body,
             final APICallBack<LinkedHashMap<String, Object>> callBack
     ) {
@@ -126,16 +128,17 @@ public class ObjectivityController extends BaseController {
 
         //prepare query string for API call
         StringBuilder queryBuilder = new StringBuilder(baseUri);
-        queryBuilder.append("/objectivity/form");
+        queryBuilder.append("/keywords/form");
         //validate and preprocess url
         String queryUrl = APIHelper.cleanUrl(queryBuilder);
 
         //load all headers for the outgoing API request
         Map<String, String> headers = new HashMap<String, String>() {
-            private static final long serialVersionUID = 5209322653408443554L;
+            private static final long serialVersionUID = 5284143568955260229L;
             {
                     put( "user-agent", "APIMATIC 2.0" );
                     put( "accept", "application/json" );
+                    put( "apikey", apikey );
                     put( "apikey", apikey );
             }
         };
